@@ -14,7 +14,7 @@ declare global {
     }
 }
 
-export const user = (req: Request, res: Response, next: NextFunction) => {
+export const checkUser = (req: Request, res: Response, next: NextFunction) => {
     // same with !req.session  || !req.session.jwt
     if (!req.cookies.jsonwebtoken) return next();
 
@@ -27,16 +27,6 @@ export const user = (req: Request, res: Response, next: NextFunction) => {
     } catch (error) {
         return res.status(400).send(error);
     }
-
-    next();
-};
-
-export const requireAuth = (
-    req: Request,
-    res: Response,
-    next: NextFunction
-) => {
-    if (!req.user) return res.sendStatus(401);
 
     next();
 };

@@ -13,7 +13,7 @@ export const signupController = async (req: Request, res: Response) => {
 
         const userJwt = jwt.sign(
             {
-                id: user._id,
+                _id: user._id,
                 email: user.email,
             },
             process.env.JWT_KEY!
@@ -40,12 +40,12 @@ export const signinController = async (req: Request, res: Response) => {
 
         const userJwt = jwt.sign(
             {
-                id: existingUser.id,
+                _id: existingUser.id,
                 email: existingUser.email,
             },
             process.env.JWT_KEY!
         );
-        console.log();
+
         res.cookie('jsonwebtoken', userJwt);
         res.status(200).send(existingUser);
     } catch (error) {
