@@ -1,6 +1,10 @@
 import express from 'express';
 import { body } from 'express-validator';
-import { signupController, signinController } from '../controllers/auth';
+import {
+    signupController,
+    signinController,
+    signoutControler,
+} from '../controllers/auth';
 const router = express.Router();
 
 router.post(
@@ -15,5 +19,6 @@ router.post(
     signupController
 );
 router.post('/signin', signinController);
+router.get('/signout', signoutControler);
 
 export { router as authRoute };
