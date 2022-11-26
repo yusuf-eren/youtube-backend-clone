@@ -13,14 +13,6 @@ app.use(cookieParser());
 app.use('/auth', authRoute);
 app.use('/channel', checkUser, channelRoute);
 app.use('/video', checkUser, videoRoute);
-// await Video.create({
-//     title: "Zort",
-//     likes: new mongoose.Types.ObjectId("63822f369ce2229f4647066b"),
-//     comments: {
-//         comment: "Heloo",
-//         userId: new mongoose.Types.ObjectId("63822f369ce2229f4647066b")
-//     }
-// })
 
 app.all('*', async (req: Request, res: Response) => {
     return res.sendStatus(404);
