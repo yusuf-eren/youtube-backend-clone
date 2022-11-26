@@ -5,9 +5,11 @@ import {
     uploadVideo,
     editVideo,
     deleteVideo,
+    viewVideo,
 } from '../controllers/video';
 const app = express.Router();
 
+app.get('/:videoId', viewVideo);
 app.post('/upload', uploadVideo);
 app.patch('/edit', editVideo);
 app.delete('/delete', deleteVideo);
