@@ -23,6 +23,7 @@ const VideoSchema = new Schema({
             },
         },
     ],
+    views: { type: Number, default: 0, required: false },
 });
 
 export const Video = mongoose.model('Video', VideoSchema);
