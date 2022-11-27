@@ -12,16 +12,20 @@ export const viewVideo = async (req: Request, res: Response) => {
     const video = await Video.findOne({ url: videoId });
     if (!video) return res.status(404).json({ message: 'Video not found' });
     const user = await User.findOne({ _id: req.user?._id });
-    if (user?.watchedVideos.includes(video.url))
+    if (user?.watchedVideos.includes(video.url)) {
         return res.status(200).json({
+            url: video.S3_url,
             message: 'Video already watched. Not increasing views...',
         });
+    }
     user?.watchedVideos.push(video.url);
     await user?.save();
     video.views++;
     await video.save();
 
-    res.status(200).json({ message: 'Video watched' });
+    return res
+        .status(200)
+        .json({ url: video.S3_url, message: 'Watching video...' });
 };
 
 export const uploadVideo = async (req: Request, res: Response) => {
