@@ -5,6 +5,7 @@ const VideoSchema = new Schema({
     description: { type: String, required: false },
     channel: { type: mongoose.Schema.Types.ObjectId, required: true },
     url: { type: String, required: true },
+    S3_url: { type: String, required: false },
     comments: [
         {
             comment: { type: String, required: false },
