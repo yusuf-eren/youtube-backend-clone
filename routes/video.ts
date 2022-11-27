@@ -9,10 +9,9 @@ import {
 } from '../controllers/video';
 const app = express.Router();
 
-app.get('/:videoId', viewVideo);
+// /video route
+app.route('/:videoId').get(viewVideo).patch(editVideo).delete(deleteVideo);
 app.post('/upload', uploadVideo);
-app.patch('/edit', editVideo);
-app.delete('/delete', deleteVideo);
 app.route('/:videoId/like').post(likeVideo).delete(dislikeVideo);
 
 export { app as videoRoute };
