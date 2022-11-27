@@ -1,7 +1,7 @@
 # Youtube Backend Clone with AWS-NodeJS
 
 ## This Repository Includes;
-### ```NodeJS, ExpressJS, TypeScript, AWS S3 Video Streaming, Mongoose, Docker, Kubernetes, Skaffold```
+### ```NodeJS, ExpressJS, Testing, TypeScript, AWS S3 Video Streaming, Mongoose, Docker, Kubernetes, Skaffold```
 ## How to install?
 
 ### First of all you should configure your .env file with the example file
@@ -13,6 +13,11 @@ npm install
 ## How to run?
 ```
 npm run start:dev
+```
+
+## How to run tests?
+```
+npm run test
 ```
 
 # Docker
