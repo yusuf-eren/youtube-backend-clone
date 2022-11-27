@@ -1,5 +1,7 @@
 # Youtube Backend Clone with AWS-NodeJS
 
+## This Repository Includes;
+### ```NodeJS, ExpressJS, TypeScript, AWS S3 Video Streaming, Mongoose, Docker, Kubernetes, Skaffold```
 ## How to install?
 
 ### First of all you should configure your .env file with the example file
