@@ -55,7 +55,7 @@ it('clear cookie when signed out', async () => {
 });
 
 it('can not signout when the user is not logged in', async () => {
-    const response = await request(app)
+    await request(app)
         .get('/auth/signout')
         .send()
         .expect(400);
