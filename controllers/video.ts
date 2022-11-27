@@ -1,5 +1,4 @@
 import { Request, Response } from 'express';
-import mongoose from 'mongoose';
 import { Video } from '../models/video';
 import { generateShortID, isValidID } from '../services/url';
 
