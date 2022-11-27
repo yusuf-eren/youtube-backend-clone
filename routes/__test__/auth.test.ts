@@ -49,7 +49,15 @@ it('clear cookie when signed out', async () => {
         })
         .expect(200);
 
-    const response = await request(app).post('/auth/signout').send();
-    const cookie = response.get('Set-Cookie');
-    expect(cookie).toBeUndefined();
+    const response = await request(app).get('/auth/signout').send();
+    const cookies = response.headers['set-cookie'][0].split(',').map((item:any) => item.split(';')[0])[0]
+    expect(cookies.length).toEqual(13);
+});
+
+it('can not signout when the user is not logged in', async () => {
+    const response = await request(app)
+        .get('/auth/signout')
+        .send()
+        .expect(200);
+    console.log(response)
 });

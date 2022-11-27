@@ -5,6 +5,7 @@ import {
     signinController,
     signoutControler,
 } from '../controllers/auth';
+import { checkUser } from '../middlewares/auth';
 const router = express.Router();
 
 router.post(
@@ -19,6 +20,6 @@ router.post(
     signupController
 );
 router.post('/signin', signinController);
-router.get('/signout', signoutControler);
+router.get('/signout', checkUser, signoutControler);
 
 export { router as authRoute };
