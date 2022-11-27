@@ -58,6 +58,5 @@ it('can not signout when the user is not logged in', async () => {
     const response = await request(app)
         .get('/auth/signout')
         .send()
-        .expect(200);
-    console.log(response)
+        .expect(400);
 });
