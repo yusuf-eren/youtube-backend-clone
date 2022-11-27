@@ -4,7 +4,8 @@ import { User } from '../models/user';
 
 export const subscribeChannel = async (req: Request, res: Response) => {
     const channelID = req.params.channelId.toLowerCase();
-    if(channelID.length !== 24) return res.status(400).json({message: "Object Id is not valid"})
+    if (channelID.length !== 24)
+        return res.status(400).json({ message: 'Object Id is not valid' });
 
     const channel = await User.findById({ _id: req.params.channelId });
     const userID = new mongoose.Types.ObjectId(req.user?._id);
@@ -22,12 +23,13 @@ export const subscribeChannel = async (req: Request, res: Response) => {
     user?.subscribedChannels.push(channel._id);
     user?.save();
 
-    res.send(channel);
+    res.status(200).send({ message: 'subscribed' });
 };
 export const unsubscribeChannel = async (req: Request, res: Response) => {
     const channelID = req.params.channelId.toLowerCase();
-    if(channelID.length !== 24) return res.status(400).json({message: "Object Id is not valid"})
-    
+    if (channelID.length !== 24)
+        return res.status(400).json({ message: 'Object Id is not valid' });
+
     const channel = await User.findById({ _id: channelID });
     const userID = new mongoose.Types.ObjectId(req.user?._id);
 
@@ -55,5 +57,5 @@ export const unsubscribeChannel = async (req: Request, res: Response) => {
             }
         }
     );
-    res.send('channel');
+    res.status(200).send({ message: 'unsubscribed' });
 };
