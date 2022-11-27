@@ -7,11 +7,16 @@ import {
     deleteVideo,
     viewVideo,
 } from '../controllers/video';
+import { checkVideo, checkVideoAndUser } from '../middlewares/video';
 const app = express.Router();
 
 // /video route
-app.route('/:videoId').get(viewVideo).patch(editVideo).delete(deleteVideo);
+app.route('/:videoId')
+    .get(viewVideo)
+    .patch(checkVideoAndUser, editVideo)
+    .delete(checkVideoAndUser, deleteVideo);
 app.post('/upload', uploadVideo);
-app.route('/:videoId/like').post(likeVideo).delete(dislikeVideo);
+app.route('/:videoId/like').get(checkVideo, likeVideo);
+app.route('/:videoId/dislike').get(checkVideo, dislikeVideo);
 
 export { app as videoRoute };
