@@ -1,18 +1,14 @@
-apiVersion: skaffold/v2alpha3
+apiVersion: skaffold/v2beta29
 kind: Config
+metadata:
+  name: youtube-backend-clone
+build:
+  artifacts:
+  - image: yusuferen/youtube-backend
+    docker:
+      dockerfile: Dockerfile
 deploy:
   kubectl:
     manifests:
-      - ./infra/k8s/*
-build:
-  local:
-    push: false
-  artifacts:
-    - image: yusuferen/youtube-backend
-      context: backend
-      docker:
-        dockerfile: Dockerfile
-      sync:
-        manual:
-          - src: "src/**/*.ts"
-            dest: .
+    - infra/k8s/ingress.yaml
+    - infra/k8s/deployment.yaml
