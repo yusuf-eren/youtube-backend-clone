@@ -1,5 +1,9 @@
 # Youtube Backend Clone with AWS-NodeJS
 
+# DB Schema
+![youtube_clone_backend drawio](https://user-images.githubusercontent.com/57640907/204165860-b7ccbf5a-8b1e-4ccd-b7c7-7706a4684121.png)
+
+
 ## This Repository Includes;
 ### ```NodeJS, ExpressJS, Testing, TypeScript, AWS S3 Video Streaming, Mongoose, Docker, Kubernetes, Skaffold```
 ## How to install?
