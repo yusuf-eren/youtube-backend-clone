@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: youtube-backend-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: youtube-backend
+  template:
+    metadata:
+      labels:
+        app: youtube-backend
+    spec:
+      containers:
+        - name: auth
+          image: yusuferen/youtube-backend
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: youtube-backend-srv
+spec:
+  selector:
+    app: youtube-backend
+  ports:
+    - name: youtube-backend
+      protocol: TCP
+      port: 3000
+      targetPort: 3000
