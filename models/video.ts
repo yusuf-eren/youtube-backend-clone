@@ -4,7 +4,7 @@ const VideoSchema = new Schema({
     title: { type: String, required: true },
     description: { type: String, required: false },
     channel: { type: mongoose.Schema.Types.ObjectId, required: true },
-    url: { type: String, required: false },
+    url: { type: String, required: true },
     comments: [
         {
             comment: { type: String, required: false },
