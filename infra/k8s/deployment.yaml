@@ -13,7 +13,7 @@ spec:
         app: youtube-backend
     spec:
       containers:
-        - name: auth
+        - name: backend
           image: yusuferen/youtube-backend
 ---
 apiVersion: v1
