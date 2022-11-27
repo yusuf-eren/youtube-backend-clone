@@ -15,9 +15,6 @@ declare global {
 }
 
 export const checkUser = (req: Request, res: Response, next: NextFunction) => {
-    // same with !req.session  || !req.session.jwt
-    if (!req.cookies.jsonwebtoken) return next();
-
     try {
         const payload = jwt.verify(
             req.cookies.jsonwebtoken,
