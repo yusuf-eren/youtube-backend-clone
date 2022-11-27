@@ -5,6 +5,7 @@ import { app } from '../app';
 
 declare global {
     var signup: () => Promise<string[]>;
+    var createChannel: ()=> Promise<any>;
 }
 
 let mongo: any;
@@ -45,3 +46,14 @@ global.signup = async () => {
 
     return cookie;
 };
+
+global.createChannel = async ()=> {
+    const name = 'channel';
+    const email = 'channel@test.com';
+    const password = 'password1';
+
+    return await request(app)
+        .post('/auth/signup')
+        .send({ name, email, password })
+        .expect(201);
+}
