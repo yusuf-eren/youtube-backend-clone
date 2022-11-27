@@ -14,6 +14,7 @@ const UserSchema = new Schema({
     videos: [
         { type: mongoose.Schema.Types.ObjectId, ref: 'Video', required: false },
     ],
+    watchedVideos: [{ type: String, required: false }],
 });
 
 UserSchema.pre('save', async function (done) {
