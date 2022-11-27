@@ -3,6 +3,7 @@ import mongoose, { Schema } from 'mongoose';
 const VideoSchema = new Schema({
     title: { type: String, required: true },
     description: { type: String, required: false },
+    channel: { type: mongoose.Schema.Types.ObjectId, required: true },
     url: { type: String, required: false },
     comments: [
         {
@@ -16,11 +17,16 @@ const VideoSchema = new Schema({
     ],
     likes: [
         {
-            user: {
-                type: mongoose.Types.ObjectId,
-                ref: 'User',
-                required: false,
-            },
+            type: mongoose.Types.ObjectId,
+            ref: 'User',
+            required: false,
+        },
+    ],
+    dislikes: [
+        {
+            type: mongoose.Types.ObjectId,
+            ref: 'User',
+            required: false,
         },
     ],
     views: { type: Number, default: 0, required: false },
