@@ -22,9 +22,18 @@ export const uploadVideo = async (req: Request, res: Response) => {
         description,
         url: generateShortID(),
     });
-    res.status(201).send(video);
+    return res.status(201).send(video);
 };
-export const editVideo = async (req: Request, res: Response) => {};
+export const editVideo = async (req: Request, res: Response) => {
+    const { title, description } = req.body;
+    const videoId = req.params.videoId;
+    const video = await Video.findOne({ url: videoId });
+    if (!video) return res.status(404).json({ message: 'Video not found' });
+    video.title = title || video.title;
+    video.description = description || video.description;
+    await video.save();
+    return res.status(200).send(video);
+};
 export const deleteVideo = async (req: Request, res: Response) => {};
 
 export const likeVideo = async (req: Request, res: Response) => {};
