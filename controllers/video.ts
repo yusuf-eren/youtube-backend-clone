@@ -2,6 +2,7 @@ import { Request, Response } from 'express';
 import mongoose from 'mongoose';
 import { User } from '../models/user';
 import { Video } from '../models/video';
+import { uploadVideo_AWS_S3 } from '../services/aws/s3';
 import { generateShortID, isValidID } from '../services/url';
 
 export const viewVideo = async (req: Request, res: Response) => {
@@ -10,8 +11,11 @@ export const viewVideo = async (req: Request, res: Response) => {
         return res.status(403).json({ message: 'Video id is not valid' });
     const video = await Video.findOne({ url: videoId });
     if (!video) return res.status(404).json({ message: 'Video not found' });
-    const user = await User.findOne({ _id : req.user?._id })
-    if(user?.watchedVideos.includes(video.url)) return res.status(200).json({ message: 'Video already watched. Not increasing views...' });
+    const user = await User.findOne({ _id: req.user?._id });
+    if (user?.watchedVideos.includes(video.url))
+        return res.status(200).json({
+            message: 'Video already watched. Not increasing views...',
+        });
     user?.watchedVideos.push(video.url);
     await user?.save();
     video.views++;
@@ -19,7 +23,10 @@ export const viewVideo = async (req: Request, res: Response) => {
 
     res.status(200).json({ message: 'Video watched' });
 };
+
 export const uploadVideo = async (req: Request, res: Response) => {
+    if (!req.file) return res.status(400).json({ message: 'add a video' });
+    const name = req.file.originalname;
     const { title, description } = req.body;
     if (!title) return res.status(403).json({ message: 'Title is required' });
     const video = await Video.create({
@@ -28,6 +35,8 @@ export const uploadVideo = async (req: Request, res: Response) => {
         url: generateShortID(),
         channel: new mongoose.Types.ObjectId(req.user?._id),
     });
+    const file = req.file.buffer;
+    await uploadVideo_AWS_S3(video._id.toString(), file);
     return res.status(201).json(video);
 };
 
